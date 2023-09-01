@@ -63,9 +63,9 @@ pipeline {
       }
     }
 
-    stage('test') {
+    stage('End repport') {
       steps {
-        waitForBuild jobLaunch.id
+        echo 'End'
       }
     }
 
