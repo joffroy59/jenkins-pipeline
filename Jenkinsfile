@@ -37,8 +37,25 @@ pipeline {
     }
 
     stage('End') {
+      parallel {
+        stage('End') {
+          steps {
+            echo 'End'
+          }
+        }
+
+        stage('publish ') {
+          steps {
+            echo 'fff'
+          }
+        }
+
+      }
+    }
+
+    stage('test') {
       steps {
-        echo 'End'
+        waitForBuild 'Changelog'
       }
     }
 
