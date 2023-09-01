@@ -29,7 +29,7 @@ pipeline {
 
         stage('Launch other job - changelog ') {
           steps {
-            build(job: 'Changelog', propagate: true, wait: true)
+            def jobLaunched = build(job: 'Changelog', propagate: true, wait: true)
           }
         }
 
@@ -55,7 +55,7 @@ pipeline {
 
     stage('test') {
       steps {
-        waitForBuild 'Changelog'
+        waitForBuild jobLaunched.id
       }
     }
 
