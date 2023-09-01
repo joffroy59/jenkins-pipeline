@@ -1,5 +1,3 @@
-def jobLaunch
-
 pipeline {
   agent any
   stages {
@@ -37,14 +35,6 @@ pipeline {
 
           }
         }
-
-        stage('wait buid ok') {
-          steps {
-            waitForBuild(runId: '${jobLaunch.id}', propagate: true)
-            echo 'job ended'
-          }
-        }
-
       }
     }
 
