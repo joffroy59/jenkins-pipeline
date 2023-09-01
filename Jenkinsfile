@@ -29,7 +29,9 @@ pipeline {
 
         stage('Launch other job - changelog ') {
           steps {
-            def jobLaunched = build(job: 'Changelog', propagate: true, wait: true)
+            script {
+              def jobLaunched = build(job: 'Changelog', propagate: true, wait: true)
+            }
           }
         }
 
