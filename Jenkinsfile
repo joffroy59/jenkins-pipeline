@@ -27,6 +27,12 @@ pipeline {
           }
         }
 
+        stage('Launch other job - changelog ') {
+          steps {
+            build(job: 'Changelog', propagate: true, wait: true)
+          }
+        }
+
       }
     }
 
