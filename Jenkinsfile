@@ -1,63 +1,15 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    stage('Init') {
+    stage('Prepare Stages') {
       steps {
-        sh 'echo "Stage 1 - Step1"'
-      }
-    }
-
-    stage('Parallel1') {
-      parallel {
-        stage('Parallel1') {
-          steps {
-            echo 'Parallel 1 -Step 1'
+        script {
+          for (int i = 1; i < 5; i++) {
+            stepsToRun["Step${i}"] = prepareStage("Step${i}")
           }
+          parallel stepsToRun
         }
 
-        stage('Parallel 2') {
-          steps {
-            echo 'Parallel 2 -Step 1'
-          }
-        }
-
-        stage('checkout git') {
-          steps {
-            git(url: 'https://github.com/joffroy59/git-blank.git', branch: 'main', credentialsId: 'github-joffroy59', changelog: true)
-          }
-        }
-
-        stage('Launch other job - changelog ') {
-          steps {
-            script {
-              jobLaunch = build(job: 'Changelog', propagate: true, wait: true)
-            }
-
-          }
-        }
-      }
-    }
-
-    stage('End') {
-      parallel {
-        stage('End') {
-          steps {
-            echo 'End'
-          }
-        }
-
-        stage('publish ') {
-          steps {
-            echo 'fff'
-          }
-        }
-
-      }
-    }
-
-    stage('End repport') {
-      steps {
-        echo 'End'
       }
     }
 
