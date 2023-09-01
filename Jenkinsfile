@@ -1,3 +1,5 @@
+def jobLaunch
+
 pipeline {
   agent any
   stages {
