@@ -21,6 +21,12 @@ pipeline {
           }
         }
 
+        stage('checkout git') {
+          steps {
+            git(url: 'https://github.com/joffroy59/git-blank.git', branch: 'main', credentialsId: 'github-joffroy59', changelog: true)
+          }
+        }
+
       }
     }
 
