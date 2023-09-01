@@ -1,3 +1,4 @@
+def jobLaunch
 pipeline {
   agent any
   stages {
@@ -30,7 +31,7 @@ pipeline {
         stage('Launch other job - changelog ') {
           steps {
             script {
-              def jobLaunched = build(job: 'Changelog', propagate: true, wait: true)
+              jobLaunch = build(job: 'Changelog', propagate: true, wait: true)
             }
           }
         }
@@ -57,7 +58,7 @@ pipeline {
 
     stage('test') {
       steps {
-        waitForBuild jobLaunched.id
+        waitForBuild jobLaunch.id
       }
     }
 
